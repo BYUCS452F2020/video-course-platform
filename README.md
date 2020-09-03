@@ -8,7 +8,7 @@ I'm looking for one or two others to join the team.
 Most likely PostgreSQL, open to suggestions.
 
 ## NoSQL
-Document based database. Want to dicuss different options.
+Document based database. Want to discuss different options.
 
 ## Business
 This will be an open source project, so there will be minimal business interaction. Maintenance of the project will be open to contributors.
