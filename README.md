@@ -1,4 +1,4 @@
-# video-course-platform
+# Video Course Platform
 We will be creating an open source video course management platform for those who want to develop courses for business, educational, or training may have a platform to do so. An admin will be able to log in, create courses, and give course-specific access to others. A user will be able to log in and view the video course.
 
 ## Team
