@@ -1,0 +1,18 @@
+CS 452 Response to Pitch
+Name: Zachary Young
+
+I really like this project proposal idea. The open source aspect of the project is intriguing to me as I have never worked on an open source project before. I also think it would be very interesting to learn about how people store video files for projects like this, since these files can get very large.  
+
+As far as contribution, I have some experience working with React Native for a job, and have also done some React web development for another course. I feel fairly competent using those technologies, but would have to brush up before working on the frontend. I work with MySQL databases for my current job occasionally, and have learned some of the details of working with relational databases (though I am by no means an expert). I have done some NoSQL work, but only for BYU classes (i.e., CS260, CS340). I would feel comfortable working on any part of the project, and would be willing to put in some extra time to learn the technologies as needed. 
+
+Business: 
+It makes sense there will be little business interaction, as this project is open source. That also means it will be more accessible to people, which is a really awesome aspect of the project. 
+
+Legal: 
+I noticed there is already an MIT license for the project. That should be a great foundation for the open source work being done on the software. 
+
+Technical: 
+Finalizing Databases: I think PostgreSQL and a document database sound like good options. Another type of NoSQL database that might work is a graph database (for representing connections between owners of the course information and the learners), but a document database would likely work better. Node should be a good technology for the server-side code.
+
+I hope you will consider me for your project!
+
