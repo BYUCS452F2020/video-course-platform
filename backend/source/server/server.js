@@ -17,15 +17,32 @@ app.use(express.urlencoded({ extended: true }));
 //import bodyParser from 'body-parser';
 const port = 3000;
 
+// The current response object. 
+let response; 
+
+function clearResponse() {
+  response = null; 
+}
+
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// Pass a {type}Response to these types of functions. 
+function handleLoginResponse(loginResponse) {
+  // TODO: Add return status here and strip the return status from 
+  // the loginResponse message. 
+
+  response.send(loginResponse); 
+  // Call at the end of every callback function. 
+  clearResponse();  
+}
+
 app.post('/login', (req, res) => {
   let username = req.body.username;
   let password = req.body.password; 
-  let loginResponse = LoginService.loginUser(new LoginRequest(username, password)); 
-  res.send(loginResponse);
+  response = res; 
+  new LoginService().loginUser(new LoginRequest(username, password), handleLoginResponse);
 });
 
 app.listen(port, () => {

@@ -1,15 +1,21 @@
 import SQLiteUserDao from '../dao/sqliteDao/SQLiteUserDao.js'; 
 import {LoginResponse} from '../../shared/shared.js'; 
-import Service from './Service.js'; 
+import ServiceHelper from './ServiceHelper.js'; 
 
-export default class LoginService extends Service {
-  static loginUser(loginRequest) {
+export default class LoginService {
+  loginUser(loginRequest, onResponseCallback) {
     let dao = new SQLiteUserDao(); 
-    dao.getUser(loginRequest.username, loginRequest.password).then(user => {
+    dao.getUser(loginRequest.username, loginRequest.password, this.returnLoginResponse, onResponseCallback);
+  }
+
+  // Note: Additional callbacks should only hold our onResponseCallback. 
+  returnLoginResponse(user, error, additionalCallbacks) {
+    if (user !== null) { 
       console.log(user); 
-      return new LoginResponse("OK: 200; Success!", true, user);
-    }).catch(error => {
-      return new LoginResponse(this.appendServerErrorNumber('Bad user credentials.') , false, null); 
-    }); 
+      additionalCallbacks[0](new LoginResponse("OK: 200; Success!", true, user)); 
+    }
+    else if (error !== null) {
+      additionalCallbacks[0](new LoginResponse(ServiceHelper.appendServerErrorNumber(error, 'Bad user credentials.'), false, null));
+    }
   }
 }

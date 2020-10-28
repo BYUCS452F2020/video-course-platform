@@ -15,9 +15,8 @@ export default class SQLiteUserDao extends IUserDao {
     //console.log('Creating user: ' + user.firstName + user.lastName); 
   }
 
-  async getUser(username, password) {
+  getUser(username, password, callback, ...additionalCallbacks) {
     let db = SQLiteDaoHelper.createDB(); 
-    let user; 
 
     db.serialize(() => {
       // Get only one row (if matches). 
@@ -26,18 +25,17 @@ export default class SQLiteUserDao extends IUserDao {
               [username, password], 
               (error, row) => {
                 if (error) {
-                  SQLiteDaoHelper.throwInternalSQLError(error.message);  
+                  console.log('Internal error.'); 
+                  callback(null, SQLiteDaoHelper.returnInternalSQLError(error.message), additionalCallbacks);  
                 } 
                 else {
                   if (row === undefined) {
                     console.log('User is undefined.');
-                    SQLiteDaoHelper.throwInvalidDataSQLError('User undefined'); 
+                    callback(null, SQLiteDaoHelper.returnInvalidDataSQLError('User undefined'), additionalCallbacks); 
                   }
                   else {
-                    console.log(row); 
-                    user = new User(row.Username, row.First_Name, row.Last_Name, row.Email, row.Sign_Up_Date); 
-                    console.log(user); 
-                    return user; 
+                    let user = new User(row.Username, row.First_Name, row.Last_Name, row.Email, row.Sign_Up_Date); 
+                    callback(user, null, additionalCallbacks); 
                   }
                 }
               }

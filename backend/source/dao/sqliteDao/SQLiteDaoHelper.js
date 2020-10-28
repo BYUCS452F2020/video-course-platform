@@ -8,17 +8,17 @@ sqlite3.verbose();
 export default class SQLiteDaoHelper { 
   static database
 
-  static createDB() {
-    return new sqlite3.Database(path.resolve('/Users/zacharyyoung/Desktop/CSSchool/cs452/projects/video-course-platform/backend/source/dao/sqliteDao', 'video-course.sqlite'));
+  static createDB(callback) {
+    return new sqlite3.Database(path.resolve('/Users/zacharyyoung/Desktop/CSSchool/cs452/projects/video-course-platform/backend/source/dao/sqliteDao', 'video-course.sqlite'), callback);
   }
 
-  // Thrown when the user gives invalid values. 
-  static throwInvalidDataSQLError(message) {
-    throw new InvalidDataDBError(message); 
+  // Returns when the user gives invalid values. 
+  static returnInvalidDataSQLError(message) {
+    return new InvalidDataDBError(message); 
   }
 
   // There was an error accessing the database. 
-  static throwInternalSQLError(message) {
-    throw new InternalDBError(message);
+  static returnInternalSQLError(message) {
+    return new InternalDBError(message);
   }
 }
