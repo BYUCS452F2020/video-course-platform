@@ -1,0 +1,43 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The backend for open source video-course platform",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf compiled/ && babel ./source --out-dir compiled/ --ignore ./node_modules,./.babelrc,./package.json,./package-lock.json,./.gitignore --copy-files",
+    "start": "node ./source/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BYUCS452F2020/video-course-platform.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BYUCS452F2020/video-course-platform/issues"
+  },
+  "homepage": "https://github.com/BYUCS452F2020/video-course-platform#readme",
+  "dependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5.0.0"
+  },
+  "nodemonConfig": {
+    "exec": "npm start",
+    "watch": [
+      "MY_CODE_DIRECTORY/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  }
+}
