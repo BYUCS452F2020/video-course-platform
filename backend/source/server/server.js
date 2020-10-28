@@ -1,16 +1,17 @@
 import express from 'express'; 
 
 // Request classes. 
-import { LoginRequest } from '../../shared/shared.js'; 
+import { LoginRequest, UserCoursesRequest } from '../../shared/shared.js';
 
 // Response classes. 
-import { LoginResponse } from '../../shared/shared.js';
+import { LoginResponse, UserCoursesResponse } from '../../shared/shared.js';
 
 // Model classes.
-import { User } from '../../shared/shared.js';
+import { User, Enrollment } from '../../shared/shared.js';
 
 // Service classes. 
 import LoginService from '../service/LoginService.js';
+import EnrollmentService from '../service/EnrollmentService.js';
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -38,6 +39,15 @@ function handleLoginResponse(loginResponse) {
   clearResponse();  
 }
 
+function handleUserCourseResponse(userCoursesResponse) {
+  // TODO: Add return status here and strip the return status from 
+  // the userCoursesResponse message. 
+
+  response.send(userCoursesResponse); 
+  // Call at the end of every callback function. 
+  clearResponse(); 
+}
+
 app.post('/login', (req, res) => {
   let username = req.body.username;
   let password = req.body.password; 
@@ -45,6 +55,12 @@ app.post('/login', (req, res) => {
   new LoginService().loginUser(new LoginRequest(username, password), handleLoginResponse);
 });
 
+app.get('/userCoursesRequest', (req, res) => {
+  let userId = req.body.userId;
+  response = res; 
+  new EnrollmentService().userCoursesRequest(new UserCoursesRequest(userId), handleUserCourseResponse);
+});
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Video Course Platform listening at http://localhost:${port}`);
 });

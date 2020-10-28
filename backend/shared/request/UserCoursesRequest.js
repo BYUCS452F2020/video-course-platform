@@ -1,16 +1,16 @@
 import Request from './Request.js'; 
 
 export default class UserCoursesRequest extends Request {
-  constructor(username) {
+  constructor(userId) {
     super(); 
-      this._username = username;
+      this._userId = userId;
   }
 
-  set username(username) {
-    this._username = username; 
+  set userId(userId) {
+    this._userId = userId; 
   }
 
-  get username() {
-    return this._username; 
+  get userId() {
+    return this._userId; 
   }
 }

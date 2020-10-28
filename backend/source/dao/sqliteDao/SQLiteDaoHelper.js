@@ -9,7 +9,6 @@ export default class SQLiteDaoHelper {
   static database
 
   static createDB(callback) {
-    console.log(path.join(path.resolve(), 'source', 'database', 'video-course.sqlite' ));
     return new sqlite3.Database(path.join(path.resolve(), 'source', 'database', 'video-course.sqlite'), callback);
   }
 

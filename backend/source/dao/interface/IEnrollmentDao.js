@@ -5,21 +5,21 @@
 export default class IEnrollmentDao {
   constructor() {}
 
-  createEnrollment(user, courseId) {
-    throw 'Implement createEnrollment(user, courseId) in child class.'; 
+  createEnrollment(userId, courseId) {
+    throw 'Implement createEnrollment(userId, courseId) in child class.'; 
   }
 
-  getEnrollments(user) {
-    throw 'Implement getEnrollments(user) in child class.';  
+  getEnrollments(userId) {
+    throw 'Implement getEnrollments(userId) in child class.';  
   }
   
   /*
-  verifyEnrollment(user, courseId) {
-    throw 'Implement verifyEnrollment(user, courseId) in child class.';  
+  verifyEnrollment(userId, courseId) {
+    throw 'Implement verifyEnrollment(userId, courseId) in child class.';  
   }
   */
 
-  deleteEnrollment(user, courseId) {
-    throw 'Implement deleteEnrollment(user, courseId) in child class.';
+  deleteEnrollment(userId, courseId) {
+    throw 'Implement deleteEnrollment(userId, courseId) in child class.';
   }
 }
