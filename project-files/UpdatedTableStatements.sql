@@ -1,0 +1,57 @@
+-- Turn the foreign keys off to cleanly delete tables.  
+PRAGMA foreign_keys = OFF; 
+
+DROP TABLE User;  
+DROP TABLE Course; 
+DROP TABLE Enrollment; 
+DROP TABLE Unit; 
+DROP TABLE Lesson; 
+
+-- Turn the foreign keys back on. 
+PRAGMA foreign_keys = ON; 
+
+CREATE TABLE User (
+	User_Id INTEGER PRIMARY KEY AUTOINCREMENT,
+	Username VARCHAR(50) UNIQUE NOT NULL,
+	Password VARCHAR(15) NOT NULL,
+	First_Name VARCHAR(100) NOT NULL,
+	Last_Name VARCHAR(100) NOT NULL,
+	Email VARCHAR(100) NOT NULL,
+	Role VARCHAR(100) NOT NULL,
+	Sign_Up_Date TEXT NOT NULL
+);
+		
+CREATE TABLE Course (
+	Course_Id INTEGER PRIMARY KEY AUTOINCREMENT,
+	Course_Name VARCHAR(100) NOT NULL,
+	Creation_Date TEXT NOT NULL, 
+	Active INTEGER NOT NULL
+);
+	
+CREATE TABLE Enrollment (
+	Course_Id INTEGER NOT NULL,
+	User_Id INTEGER NOT NULL,
+	Enrollment_Date TEXT NOT NULL, 
+	PRIMARY KEY(Course_Id, User_Id),
+	FOREIGN KEY(Course_Id) REFERENCES Course(Course_Id) ON DELETE RESTRICT, 
+	FOREIGN KEY(User_Id) REFERENCES User(User_Id) ON DELETE CASCADE
+);
+	
+CREATE TABLE Unit (
+	Unit_Id INTEGER PRIMARY KEY AUTOINCREMENT,
+	Unit_Name VARCHAR(100) NOT NULL,
+	Unit_Number INTEGER CHECK (Unit_Number >= 1) NOT NULL,
+	Creation_Date TEXT NOT NULL, 
+	Course_Id INTEGER NOT NULL, 
+	FOREIGN KEY(Course_Id) REFERENCES Course(Course_Id) ON DELETE CASCADE
+); 	
+
+CREATE TABLE Lesson (
+	Lesson_Id INTEGER PRIMARY KEY AUTOINCREMENT,
+	Lesson_Name VARCHAR(100) NOT NULL,
+	Lesson_Video VARCHAR(250) NOT NULL,
+	Lesson_Number INTEGER CHECK (Lesson_Number >= 1) NOT NULL,
+	Creation_Date TEXT NOT NULL, 
+	Unit_Id INTEGER NOT NULL, 
+	FOREIGN KEY(Unit_Id) REFERENCES Unit(Unit_Id) ON DELETE CASCADE
+);
