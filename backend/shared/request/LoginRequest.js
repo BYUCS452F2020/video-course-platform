@@ -7,7 +7,7 @@ export default class LoginRequest extends Request {
       this._password = password;  
   }
 
-  set username(user) {
+  set username(username) {
     this._username = username; 
   }
 
