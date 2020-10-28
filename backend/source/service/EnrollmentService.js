@@ -1,5 +1,5 @@
 import SQLiteEnrollmentDao from '../dao/sqliteDao/SQLiteEnrollmentDao.js'; 
-import {UserCoursesResponse} from '../../shared/shared.js'; 
+import {Response, UserCoursesResponse} from '../../shared/shared.js'; 
 import ServiceHelper from './ServiceHelper.js'; 
 
 export default class EnrollmentService {
@@ -15,7 +15,23 @@ export default class EnrollmentService {
       additionalCallbacks[0](new UserCoursesResponse("OK: 200; Success!", true, enrollments)); 
     }
     else if (error !== null) {
-      additionalCallbacks[0](new UserCoursesResponse(ServiceHelper.appendServerErrorNumber(error, 'Unable to retrieve user\'s course enrollments.'), false, null));
+      additionalCallbacks[0](ServiceHelper.appendServerErrorNumber(error, 'Unable to retrieve user\'s course enrollments.'));
+    }
+  }
+
+  verifyEnrollment(enrollmentRequest, onResponseCallback) {
+    let dao = new SQLiteEnrollmentDao(); 
+    dao.verifyEnrollment(enrollmentRequest.userId, enrollmentRequest.courseId, this.returnVerifyEnrollmentResponse, onResponseCallback);
+  }
+
+  // Note: Additional callbacks should only hold our onResponseCallback. 
+  returnVerifyEnrollmentResponse(response, error, additionalCallbacks) {
+    if (response !== null) { 
+      console.log(response)
+      additionalCallbacks[0](new Response("OK: 200; Success!", true)); 
+    }
+    else if (error !== null) {
+      additionalCallbacks[0](ServiceHelper.appendServerErrorNumber(error, 'Unable to verify course enrollment.'));
     }
   }
 }

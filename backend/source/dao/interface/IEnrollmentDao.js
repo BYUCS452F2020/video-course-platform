@@ -13,11 +13,9 @@ export default class IEnrollmentDao {
     throw 'Implement getEnrollments(userId) in child class.';  
   }
   
-  /*
   verifyEnrollment(userId, courseId) {
     throw 'Implement verifyEnrollment(userId, courseId) in child class.';  
   }
-  */
 
   deleteEnrollment(userId, courseId) {
     throw 'Implement deleteEnrollment(userId, courseId) in child class.';

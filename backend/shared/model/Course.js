@@ -1,5 +1,5 @@
 export default class Course {
-  constructor(courseName, creationDate) {
+  constructor(courseId, courseName, creationDate, Units = []) {
     this._creationDate = null;
     this._courseName = courseName; 
     this._creationDate = creationDate;  

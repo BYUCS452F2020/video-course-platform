@@ -15,7 +15,7 @@ export default class LoginService {
       additionalCallbacks[0](new LoginResponse("OK: 200; Success!", true, user)); 
     }
     else if (error !== null) {
-      additionalCallbacks[0](new LoginResponse(ServiceHelper.appendServerErrorNumber(error, 'Bad user credentials.'), false, null));
+      additionalCallbacks[0](ServiceHelper.appendServerErrorNumber(error, 'Bad user credentials.'));
     }
   }
 }

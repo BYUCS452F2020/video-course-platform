@@ -54,6 +54,34 @@ export default class SQLiteUserDao extends IEnrollmentDao {
     }); 
   }
 
+  verifyEnrollment(userId, courseId, callback, ...additionalCallbacks) {
+    let db = SQLiteDaoHelper.createDB();
+
+    db.serialize(() => {
+      db.get('SELECT * ' + 
+      'FROM Enrollment ' +
+      'WHERE User_Id = ? AND Course_Id=?', 
+       [userId, courseId], 
+       (error, row) => {
+         if (error) {
+           console.log('Internal error.'); 
+           callback(null, SQLiteDaoHelper.returnInternalSQLError(error.message), additionalCallbacks);  
+         } 
+         else {
+           if (row === undefined) {
+             console.log('Unable to verify course enrollment.');
+             callback(null, SQLiteDaoHelper.returnInvalidDataSQLError('Unable to verify course enrollment.'), additionalCallbacks); 
+           }
+           else {
+             let response = "Able to verify enrollment for user: " + userId + " in course: " + courseId;
+             callback(response, null, additionalCallbacks); 
+           }
+         }
+       }
+); 
+    });
+  }
+
   deleteEnrollment(userId, courseId) {
     //console.log('Deleting user: ' + user.firstName + user.lastName);
   }

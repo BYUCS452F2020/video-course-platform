@@ -1,18 +1,19 @@
 import InternalDBError from '../error/InternalDBError.js'; 
-import InvalidDataDBError from '../error/InvalidDataDBError.js'; 
+import InvalidDataDBError from '../error/InvalidDataDBError.js';
+import { ErrorResponse } from '../../shared/shared.js';
 
 export default class ServiceHelper {
   constructor() {}
 
   static appendServerErrorNumber(error, message) {
     if (error instanceof InternalDBError) {
-      return 'Internal Server Error: 500; ' + message; 
+      return new ErrorResponse(message, false, 500); 
     }
     
     if (error instanceof InvalidDataDBError) {
-      return 'Bad Request: 400; ' + message; 
+      return new ErrorResponse(message, false, 400); 
     }
 
-    return message; 
+    return new ErrorResponse(message, false, 400); 
   }
 }

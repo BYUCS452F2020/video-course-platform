@@ -1,7 +1,7 @@
 import express from 'express'; 
 
 // Request classes. 
-import { LoginRequest, UserCoursesRequest } from '../../shared/shared.js';
+import { LoginRequest, UserCoursesRequest, EnrollmentRequest } from '../../shared/shared.js';
 
 // Response classes. 
 import { LoginResponse, UserCoursesResponse } from '../../shared/shared.js';
@@ -30,35 +30,38 @@ app.get('/', (req, res) => {
 });
 
 // Pass a {type}Response to these types of functions. 
-function handleLoginResponse(loginResponse) {
+function handleResponse(responseObj) {
   // TODO: Add return status here and strip the return status from 
-  // the loginResponse message. 
+  // the loginResponse message.
 
-  response.send(loginResponse); 
+  if (responseObj.statusCode !== undefined) {
+    response.status(responseObj.statusCode).send(responseObj);
+  } else {
+    response.send(responseObj); 
+  }
+  
   // Call at the end of every callback function. 
   clearResponse();  
-}
-
-function handleUserCourseResponse(userCoursesResponse) {
-  // TODO: Add return status here and strip the return status from 
-  // the userCoursesResponse message. 
-
-  response.send(userCoursesResponse); 
-  // Call at the end of every callback function. 
-  clearResponse(); 
 }
 
 app.post('/login', (req, res) => {
   let username = req.body.username;
   let password = req.body.password; 
   response = res; 
-  new LoginService().loginUser(new LoginRequest(username, password), handleLoginResponse);
+  new LoginService().loginUser(new LoginRequest(username, password), handleResponse);
 });
 
 app.get('/userCoursesRequest', (req, res) => {
   let userId = req.body.userId;
   response = res; 
-  new EnrollmentService().userCoursesRequest(new UserCoursesRequest(userId), handleUserCourseResponse);
+  new EnrollmentService().userCoursesRequest(new UserCoursesRequest(userId), handleResponse);
+});
+
+app.get('/verifyEnrollment', (req, res) => {
+  let userId = req.body.userId;
+  let courseId = req.body.courseId;
+  response = res; 
+  new EnrollmentService().verifyEnrollment(new EnrollmentRequest(userId, courseId), handleResponse);
 });
 
 app.listen(port, () => {
