@@ -22,10 +22,8 @@ function LoginPage({router}) {
       </Head>
       <div className={styles.mainContainer}> 
         <h1 className={styles.title}>Login Page!</h1>
-        <div> 
-          <LoginForm goToEnrollments={goToEnrollments} />
-        </div>
-        <Link href='/SignupPage'><a>Click here to go to the sign up page!</a></Link>
+        <LoginForm goToEnrollments={goToEnrollments} />
+        {/* <Link href='/SignupPage'><a>Click here to go to the sign up page!</a></Link> */}
       </div>
     </Layout>
   );

@@ -11,7 +11,7 @@
 .videoSidebar {
   float: left;
   margin-left: 50px;
-  width: 350px;
+  width: 400px;
 }
 
 .unitTitle {
@@ -26,10 +26,17 @@
 .unitSection ul li {
   text-decoration: none;
   padding: 20px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom:5px;
 }
 
 .unitSection ul li:hover, .selectedLesson {
   color: #fff;
-  background-color: #F0F0F2;
   cursor: pointer;
+  background-color: #3F92AB;
+}
+
+.lessonIcon {
+  margin-right: 10px;
 }

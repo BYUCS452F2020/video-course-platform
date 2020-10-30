@@ -6,12 +6,21 @@
 .form {
   display: flex; 
   flex-direction: column;
-  width: 200px; 
-  height: 200px;
+  width: 400px;
+}
+
+.formRow {
+  margin-bottom: 10px;
+}
+.formRow input {
+  display:block;
+  width: 100%;
+  padding: 10px 0;
 }
 
 .submitButton {
-  margin-top: 15%;
-  background-color: gray;
+  margin-top: 20px;
+  background-color: #3F92AB;
   color: white;
+  padding: 10px 0;
 }

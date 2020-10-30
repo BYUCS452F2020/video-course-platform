@@ -4,6 +4,9 @@ import styles from '../../styles/Course.module.css';
 import ExpressProxy from '../../proxy/ExpressProxy'; 
 import {Course, CourseRequest, CourseResponse, Unit} from '../../../shared/shared'; 
 import {Router, withRouter} from 'next/router'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons'
+import cn from 'classnames'
 
 import UserSingleton from '../../UserSingleton';
 
@@ -12,8 +15,8 @@ class CoursePage extends React.Component {
     super(props);
     this.state = {
       course: null,
-      selectedLesson: 1,
-      selectedUnit: 1
+      selectedLessonLink: '',
+      selectedLessonId: 0,
     };
   }
   
@@ -31,7 +34,15 @@ class CoursePage extends React.Component {
       if (courseResponse._course !== null) {
         console.log("Course!!!")
         console.log(courseResponse._course);
-        this.setState({course: courseResponse._course}); 
+        this.setState({course: courseResponse._course});
+        
+        if (courseResponse._course._units.length > 0) {
+          if (courseResponse._course._units[0]._lessons.length > 0) {
+            let lesson = courseResponse._course._units[0]._lessons[0];
+            this.setState({selectedLessonLink: lesson._lessonVideo, selectedLessonId: lesson._lessonId});
+          }
+        }
+        
       }
     }).catch(error => console.warn(error)); 
   }
@@ -44,7 +55,7 @@ class CoursePage extends React.Component {
         </h1>
         <div className={styles.videoPageContainer}>
           <div className={styles.videoPlayer}>
-            <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0" frameborder="0"></iframe>
+            <iframe id="ytplayer" type="text/html" width="640" height="360" src={this.state.selectedLessonLink} frameborder="0"></iframe>
           </div>
           <div className={styles.videoSidebar}>
           {this.state.course !== null ? this.state.course._units.map(unit => {
@@ -54,21 +65,24 @@ class CoursePage extends React.Component {
                     {unit._unitName}
                   </div>
                   <ul>
-                    <li className={styles.selectedLesson}>Lesson 1</li>
-                    <li>Lesson 2</li>
+                    {unit._lessons.map(lesson => {
+                      return (
+                      <a onClick={ () => {this.setState({selectedLessonLink: lesson._lessonVideo,
+                        selectedLessonId: lesson._lessonId})}}>
+                        <li 
+                          className={cn({
+                            [styles.selectedLesson] : this.state.selectedLessonId === lesson._lessonId
+                          })}
+                        >
+                            <span className={styles.lessonIcon}>{this.state.selectedLessonId === lesson._lessonId ? <FontAwesomeIcon icon={faPauseCircle} /> : <FontAwesomeIcon icon={faPlayCircle} />}</span>
+                            {lesson._lessonName}
+                        </li>
+                      </a>
+                    )})}
                   </ul>
                 </div> 
               )
           }) : null}
-            <div className={styles.unitSection}>
-              <div className={styles.unitTitle}>
-                Unit Title 1
-              </div>
-              <ul>
-                <li className={styles.selectedLesson}>Lesson 1</li>
-                <li>Lesson 2</li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
