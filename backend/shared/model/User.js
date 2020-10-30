@@ -1,11 +1,20 @@
 export default class User {
-  constructor(username, firstName, lastName, email, signUpDate, role) {
+  constructor(userId, username, firstName, lastName, email, role, signUpDate) {
+    this._userId = userId;
     this._username = username; 
     this._firstName = firstName; 
     this._lastName = lastName; 
     this._email = email; 
-    this._signUpDate = signUpDate; 
     this._role = role; 
+    this._signUpDate = signUpDate; 
+  }
+
+  set userId(userId) {
+    this._userId = userId; 
+  }
+
+  get userId() {
+    return this._userId; 
   }
 
   set username(username) {

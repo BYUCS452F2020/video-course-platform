@@ -9,7 +9,7 @@ export default class SQLiteDaoHelper {
   static database
 
   static createDB(callback) {
-    return new sqlite3.Database(path.join(path.resolve(), 'source', 'database', 'video-course.sqlite'), callback);
+    return new sqlite3.Database(path.join(path.resolve(), 'source', 'database', 'video-course.sqlite3'), callback);
   }
 
   // Returns when the user gives invalid values. 

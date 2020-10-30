@@ -9,3 +9,9 @@
   width: 200px; 
   height: 200px;
 }
+
+.submitButton {
+  margin-top: 15%;
+  background-color: gray;
+  color: white;
+}

@@ -55,21 +55,21 @@ app.post('/login', (req, res) => {
   new LoginService().loginUser(new LoginRequest(username, password), handleResponse);
 });
 
-app.get('/userCoursesRequest', (req, res) => {
-  let userId = req.body.userId;
+app.get('/userCoursesRequest/:userId', (req, res) => {
+  let userId = req.params.userId;
   response = res; 
   new EnrollmentService().userCoursesRequest(new UserCoursesRequest(userId), handleResponse);
 });
 
-app.get('/verifyEnrollment', (req, res) => {
-  let userId = req.body.userId;
-  let courseId = req.body.courseId;
+app.get('/verifyEnrollment/user/:userId/course/:courseId', (req, res) => {
+  let userId = req.params.userId;
+  let courseId = req.params.courseId;
   response = res; 
   new EnrollmentService().verifyEnrollment(new EnrollmentRequest(userId, courseId), handleResponse);
 });
 
-app.get('/loadCourse', (req, res) => {
-  let courseId = req.body.courseId;
+app.get('/loadCourse/:courseId', (req, res) => {
+  let courseId = req.params.courseId;
   response = res; 
   new CourseService().loadCourse(new CourseRequest(courseId), handleResponse);
 });

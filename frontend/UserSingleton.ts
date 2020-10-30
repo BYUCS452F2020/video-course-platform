@@ -10,6 +10,8 @@ export default class UserSingleton {
   }
 
   public static setUser(user) {
+    console.log("Setting user in UserSingleton!"); 
+    console.log(user); 
     this._user = user; 
   }
 

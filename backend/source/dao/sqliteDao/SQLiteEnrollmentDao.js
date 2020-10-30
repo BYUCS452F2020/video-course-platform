@@ -38,7 +38,7 @@ export default class SQLiteUserDao extends IEnrollmentDao {
                   else {
                     let enrollments = [];
                     rows.forEach((row) => {
-                      let enrollment = new Enrollment(row.Course_Id, row.Course_Name, row.Start_Date);
+                      let enrollment = new Enrollment(row.Course_Id, row.Course_Name, row.Enrollment_Date);
                       enrollments.push(enrollment);
                     })
                     callback(enrollments, null, additionalCallbacks); 

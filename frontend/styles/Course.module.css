@@ -1,0 +1,35 @@
+.mainContainer {
+  display: flex; 
+  flex-direction: column;
+}
+
+.videoPlayer {
+  float: left;
+  width: 640px;
+}
+
+.videoSidebar {
+  float: left;
+  margin-left: 50px;
+  width: 350px;
+}
+
+.unitTitle {
+  font-weight: 700;
+}
+
+.unitSection ul {
+  padding: 0px;
+  list-style-type: none;
+}
+
+.unitSection ul li {
+  text-decoration: none;
+  padding: 20px;
+}
+
+.unitSection ul li:hover, .selectedLesson {
+  color: #fff;
+  background-color: #F0F0F2;
+  cursor: pointer;
+}

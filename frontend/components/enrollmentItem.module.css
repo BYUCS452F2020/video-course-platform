@@ -1,0 +1,17 @@
+.enrollmentItemRow {
+  display: flex; 
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.courseName {
+  height: 100%; 
+  margin-left: 20px;
+}
+
+.enrollDate {
+  height: 100%;
+  margin-right: 20px;
+}

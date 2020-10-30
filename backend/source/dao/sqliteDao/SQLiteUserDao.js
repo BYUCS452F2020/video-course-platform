@@ -20,7 +20,7 @@ export default class SQLiteUserDao extends IUserDao {
 
     db.serialize(() => {
       // Get only one row (if matches). 
-      db.get('SELECT Username, First_Name, Last_Name, Email, Sign_Up_Date' + 
+      db.get('SELECT User_Id, Username, First_Name, Last_Name, Email, Role, Sign_Up_Date' + 
              ' FROM User WHERE Username = ? AND Password = ?', 
               [username, password], 
               (error, row) => {
@@ -34,7 +34,7 @@ export default class SQLiteUserDao extends IUserDao {
                     callback(null, SQLiteDaoHelper.returnInvalidDataSQLError('User undefined'), additionalCallbacks); 
                   }
                   else {
-                    let user = new User(row.Username, row.First_Name, row.Last_Name, row.Email, row.Sign_Up_Date); 
+                    let user = new User(row.User_Id, row.Username, row.First_Name, row.Last_Name, row.Email, row.Role, row.Sign_Up_Date); 
                     callback(user, null, additionalCallbacks); 
                   }
                 }

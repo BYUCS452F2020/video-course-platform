@@ -64,7 +64,7 @@ export default class LoginForm extends React.Component {
           <label className={styles.formRow}>Password
             <input type="password" name="password" onChange={this._handleUpdate} />
           </label>
-          <input type="submit"/>
+          <input className={styles.submitButton} type="submit" value="submit"/>
         </form>
         {this._handleLoginResult()}
     </div>

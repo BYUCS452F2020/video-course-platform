@@ -2,11 +2,9 @@
 // we can make a base class that is extended by both proxy 
 // classes kind of like our I{Type}Dao classes. 
 
-import LoginRequest from '../../shared/request/LoginRequest'; 
-
-import LoginResponse from '../../shared/response/LoginResponse'; 
-
 import UserSingleton from '../UserSingleton'; 
+
+import {LoginRequest, UserCoursesRequest, CourseRequest, LoginResponse, UserCoursesResponse, CourseResponse} from '../../shared/shared';
 
 export default class ExpoProxy {
   // TODO: Change if hosted on a server. 
@@ -34,11 +32,23 @@ export default class ExpoProxy {
     return response.json(); 
   }
 
-  static async getEnrollments(enrollmentRequest): Promise<string> {
-    const url: string = this.baseUrl + 'userCoursesRequest/' + UserSingleton.getUser()._username; 
+  static async getEnrollments(userCoursesRequest: UserCoursesRequest): Promise<string> { 
+    const url: string = this.baseUrl + 'userCoursesRequest/' + userCoursesRequest._userId; 
 
-    //userCoursesRequest/:userid
-    // req.params req.body
+    const response = await fetch(url, {
+      method: 'GET', 
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    return response.json(); 
+  }
+
+  static async loadCourse(courseRequest: CourseRequest): Promise<string> {
+    const url: string = this.baseUrl + 'loadCourse/' + courseRequest.courseId; 
+
+    //loadCourse/:courseId
 
     const response = await fetch(url, {
       method: 'GET', 

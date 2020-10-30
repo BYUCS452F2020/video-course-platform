@@ -1,8 +1,8 @@
 export default class Enrollment {
-  constructor(courseId, courseName, startDate) {
+  constructor(courseId, courseName, enrollmentDate) {
     this._courseId = courseId; 
     this._courseName = courseName; 
-    this._startDate = startDate;  
+    this._enrollmentDate = enrollmentDate;  
   }
 
   set courseId(courseId) {
@@ -21,11 +21,11 @@ export default class Enrollment {
     return this._courseName; 
   }
 
-  set startDate(startDate) {
-    this._startDate = startDate; 
+  set enrollmentDate(enrollmentDate) {
+    this._enrollmentDate = enrollmentDate; 
   }
 
-  get startDate() {
-    return this._startDate; 
+  get enrollmentDate() {
+    return this._enrollmentDate; 
   }
 }
