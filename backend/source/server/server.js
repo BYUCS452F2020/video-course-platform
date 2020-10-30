@@ -1,4 +1,6 @@
 import express from 'express'; 
+import bodyParser from 'body-parser';
+import cors from 'cors';
 
 // Request classes. 
 import { LoginRequest, UserCoursesRequest, EnrollmentRequest, CourseRequest } from '../../shared/shared.js';
@@ -15,9 +17,10 @@ import EnrollmentService from '../service/EnrollmentService.js';
 import CourseService from '../service/CourseService.js';
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(bodyParser.json()); 
 //import bodyParser from 'body-parser';
-const port = 3000;
+const port = 3001;
 
 // The current response object. 
 let response; 

@@ -1,6 +1,40 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from 'react'; 
+import Head from 'next/head'; 
+import Link from 'next/link'; 
 
+import styles from '../styles/Login.module.css'
+
+import Layout from '../components/Layout'; 
+import LoginForm from '../components/LoginForm'; 
+
+import { withRouter } from 'next/router'; 
+
+function LoginPage({router}) {
+
+  const goToEnrollments = () => {
+    router.push('/EnrollmentsPage'); 
+  }
+
+  return (
+    <Layout>
+      <Head>
+        <title>Login Page</title>
+      </Head>
+      <div className={styles.mainContainer}> 
+        <h1 className={styles.title}>Login Page!</h1>
+        <div> 
+          <LoginForm goToEnrollments={goToEnrollments} />
+        </div>
+        <Link href='/SignupPage'><a>Click here to go to the sign up page!</a></Link>
+      </div>
+    </Layout>
+  );
+}
+
+export default withRouter(LoginPage); 
+
+
+/* 
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -11,7 +45,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Learn <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
         <p className={styles.description}>
@@ -63,3 +97,4 @@ export default function Home() {
     </div>
   )
 }
+*/ 
