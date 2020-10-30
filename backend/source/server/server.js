@@ -1,7 +1,7 @@
 import express from 'express'; 
 
 // Request classes. 
-import { LoginRequest, UserCoursesRequest, EnrollmentRequest } from '../../shared/shared.js';
+import { LoginRequest, UserCoursesRequest, EnrollmentRequest, CourseRequest } from '../../shared/shared.js';
 
 // Response classes. 
 import { LoginResponse, UserCoursesResponse } from '../../shared/shared.js';
@@ -12,6 +12,7 @@ import { User, Enrollment } from '../../shared/shared.js';
 // Service classes. 
 import LoginService from '../service/LoginService.js';
 import EnrollmentService from '../service/EnrollmentService.js';
+import CourseService from '../service/CourseService.js';
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -62,6 +63,12 @@ app.get('/verifyEnrollment', (req, res) => {
   let courseId = req.body.courseId;
   response = res; 
   new EnrollmentService().verifyEnrollment(new EnrollmentRequest(userId, courseId), handleResponse);
+});
+
+app.get('/loadCourse', (req, res) => {
+  let courseId = req.body.courseId;
+  response = res; 
+  new CourseService().loadCourse(new CourseRequest(courseId), handleResponse);
 });
 
 app.listen(port, () => {

@@ -1,7 +1,8 @@
+import { Enrollment } from '../shared.js';
 import Response from './Response.js'; 
 
 export default class UserCoursesResponse extends Response {
-  constructor(message, success, enrollments = []) {
+  constructor(message, success, enrollments = Array(Enrollment)) {
     super(message, success); 
     this._enrollments = enrollments; 
   }
@@ -10,7 +11,7 @@ export default class UserCoursesResponse extends Response {
     return this._enrollments; 
   }
 
-  set enrollments(enrollments) {
+  set enrollments(enrollments = Array(Enrollment)) {
     this._enrollments = enrollments; 
   }
 }

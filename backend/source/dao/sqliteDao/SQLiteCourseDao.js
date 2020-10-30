@@ -34,7 +34,7 @@ export default class SQLiteCourseDao extends ICourseDao {
                     callback(null, SQLiteDaoHelper.returnInvalidDataSQLError('Course with Course_ID = ' + courseId + ' does not exist.'), additionalCallbacks); 
                   }
                   else {
-                    let course = new Course(row.Course_Id, row.Course_Name, row.Creation_Date, null); 
+                    let course = new Course(row.Course_Id, row.Course_Name, row.Creation_Date, []); 
                     callback(course, null, additionalCallbacks); 
                   }
                 }
@@ -52,16 +52,3 @@ export default class SQLiteCourseDao extends ICourseDao {
     //console.log('Deleting user: ' + user.firstName + user.lastName);
   }
 }
-
-/*
-      db.all('SELECT * ' + 
-      'FROM User', 
-      (error, rows) => {
-        if (error) {
-          console.log(error); 
-        } 
-        else {
-          console.log(rows); 
-        }
-      });
-      */ 

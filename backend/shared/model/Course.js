@@ -1,8 +1,11 @@
+import Unit from "./Unit.js";
+
 export default class Course {
-  constructor(courseId, courseName, creationDate, Units = []) {
-    this._creationDate = null;
+  constructor(courseId, courseName, creationDate, units = Array(Unit)) {
+    this._courseId = courseId,
     this._courseName = courseName; 
-    this._creationDate = creationDate;  
+    this._creationDate = creationDate;
+    this._units = units;
   }
 
   set courseId(courseId) {
@@ -27,5 +30,13 @@ export default class Course {
 
   get creationDate() {
     return this._creationDate; 
+  }
+
+  set units(units = Array(Unit)) {
+    this._units = units;
+  }
+
+  get units() {
+    return this._units;
   }
 }
