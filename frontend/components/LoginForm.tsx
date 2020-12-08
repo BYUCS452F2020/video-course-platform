@@ -3,6 +3,8 @@ import styles from './loginForm.module.css';
 import ExpoProxy from '../proxy/ExpressProxy'; 
 import {LoginRequest, LoginResponse} from '../../shared/shared'; 
 import UserSingleton from '../UserSingleton'; 
+import Link from 'next/link'; 
+
 
 // TODO: Move the state in this class to the parent later on. 
 export default class LoginForm extends React.Component {
@@ -45,19 +47,22 @@ export default class LoginForm extends React.Component {
     let loginSuccess: boolean = loginResponse._success;
 
     if (loginSuccess) {
-      UserSingleton.setUser(loginResponse._user);
+      UserSingleton.getInstance().setUser(loginResponse._user);
       this.props.goToEnrollments(); 
     }
 
     console.log(loginResponse._message);
 
-    return (<p>{loginResponse._message}</p>); 
+    return (<div>{loginResponse._message}</div>); 
   }
 
   render() {
     return (
       <>
         <div className={styles.container} > 
+          <div className={styles.logoContainer}>
+           <img src={"https://i.imgur.com/zJdKxo8.jpeg"} />  
+          </div>  
           <form className={styles.form} onSubmit={this._handleSubmit}>
             <label className={styles.formRow}>Username
               <input type="text" name="username" onChange={this._handleUpdate} />
@@ -65,10 +70,17 @@ export default class LoginForm extends React.Component {
             <label className={styles.formRow}>Password
               <input type="password" name="password" onChange={this._handleUpdate} />
             </label>
-            <input className={styles.submitButton} type="submit" value="SUBMIT"/>
+            <div className={styles.badLoginContainer}>{this._handleLoginResult()}</div>
+            <button className={styles.submitButton} type="submit" value="SUBMIT">LOGIN</button>
           </form>
+          <div className={styles.signUpLink}>
+          <Link href={"#"}>
+            <a>
+              Don't have an account yet? Sign up here.
+            </a>
+          </Link>
+          </div>
       </div>
-      <div>{this._handleLoginResult()}</div>
     </>
     );
   }

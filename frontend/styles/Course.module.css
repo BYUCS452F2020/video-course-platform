@@ -1,21 +1,81 @@
-.mainContainer {
-  display: flex; 
+.courseOuterContainer {
+  display: flex;
   flex-direction: column;
+  padding-top: 25px;
+}
+
+.courseContainer {
+}
+
+.courseTitleInformation {
+  margin-left: 50px;
+  margin-bottom:35px;
+}
+
+.courseTitleInformation h1 {
+  font-size: 2.5em;
+  margin:0;
+}
+
+.courseTitleInformation a {
+  text-decoration: none;
+  color: #EA3B20;
+  font-size: 17px;
+}
+
+.courseTitleInformation a:hover {
+  text-decoration: underline;
+}
+
+.courseTitleInformation .arrowLeft {
+  font-weight: 700;
+}
+
+.videoPageContainer {
+  overflow:auto;
+  display:flex;
 }
 
 .videoPlayer {
   float: left;
-  width: 640px;
+  width: calc(100vw - (100vw - 100%) - 450px);
+  height:100%;
+}
+
+.iframeContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; 
+}
+
+.iframeContainer iframe{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .videoSidebar {
   float: left;
-  margin-left: 50px;
+  padding: 25px 25px;
   width: 400px;
+  background-color: #ffffff;
+  height: inherit;
+  max-height: inherit;
+
+  border-left: 1px solid #E3E3E3;
+  
+  border-top: 1px solid #E3E3E3;
+  border-bottom: 1px solid #E3E3E3;
 }
 
 .unitTitle {
   font-weight: 700;
+}
+
+.unitSection {
+  margin-bottom: 30px;
 }
 
 .unitSection ul {
@@ -25,18 +85,34 @@
 
 .unitSection ul li {
   text-decoration: none;
-  padding: 20px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  margin-bottom:5px;
+  padding: 12px 15px;
+  margin-bottom:10px;
+  font-weight: 100;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
 }
 
-.unitSection ul li:hover, .selectedLesson {
+.unitSection ul li span {
+  vertical-align: middle;
+}
+
+.selectedLesson {
   color: #fff;
+  background-color: #4460F1;
+}
+
+.unitSection ul li:hover {
   cursor: pointer;
-  background-color: #3F92AB;
+  background-color: #eeeeee;
+  color: #4460F1;
+}
+
+.unitSection ul li.selectedLesson:hover {
+  color: #fff;
+  background-color: #4460F1;
 }
 
 .lessonIcon {
   margin-right: 10px;
+  font-size: 25px;
 }

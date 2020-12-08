@@ -1,12 +1,13 @@
-import React from 'react'; 
-import Layout from '../../components/Layout'; 
+import React from 'react';
+import Navbar from '../../components/Navbar'; 
 import styles from '../../styles/Course.module.css'; 
 import ExpressProxy from '../../proxy/ExpressProxy'; 
 import {Course, CourseRequest, CourseResponse, Unit} from '../../../shared/shared'; 
 import {Router, withRouter} from 'next/router'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons'
+import { faPlayCircle, faPauseCircle, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import cn from 'classnames'
+import Link from 'next/link'; 
 
 import UserSingleton from '../../UserSingleton';
 
@@ -24,7 +25,12 @@ class CoursePage extends React.Component {
     return { pathname }
   }
 
+  static goToEnrollments = () => {
+    router.push('/EnrollmentsPage'); 
+  }
+
   componentDidMount() {
+    console.log("User in Course: " + UserSingleton.getInstance().getUser());
     // Get initial prop for course
     const {CourseId} = this.props.router.query; 
     console.log(CourseId);
@@ -49,43 +55,57 @@ class CoursePage extends React.Component {
 
   render() {
     return (
-      <div className={styles.mainContainer}>
-        <h1>
-          {this.state.course ? this.state.course._courseName : null}
-        </h1>
-        <div className={styles.videoPageContainer}>
-          <div className={styles.videoPlayer}>
-            <iframe id="ytplayer" type="text/html" width="640" height="360" src={this.state.selectedLessonLink} frameborder="0"></iframe>
+      <>
+      <Navbar />
+      <div className={styles.courseOuterContainer}>
+        <div className={styles.courseContainer}>
+          <div className={styles.courseTitleInformation}>
+            <h1>
+              {this.state.course ? this.state.course._courseName : null}
+            </h1>
+            <Link href={"/EnrollmentsPage"}>
+              <a>
+                <span className={styles.backArrow}><span className={styles.arrowLeft}>🠄</span> back to your courses</span>
+              </a>  
+            </Link>
           </div>
-          <div className={styles.videoSidebar}>
-          {this.state.course !== null ? this.state.course._units.map(unit => {
-              return (
-                <div className={styles.unitSection}>
-                  <div className={styles.unitTitle}>
-                    {unit._unitName}
-                  </div>
-                  <ul>
-                    {unit._lessons.map(lesson => {
-                      return (
-                      <a onClick={ () => {this.setState({selectedLessonLink: lesson._lessonVideo,
-                        selectedLessonId: lesson._lessonId})}}>
-                        <li 
-                          className={cn({
-                            [styles.selectedLesson] : this.state.selectedLessonId === lesson._lessonId
-                          })}
-                        >
-                            <span className={styles.lessonIcon}>{this.state.selectedLessonId === lesson._lessonId ? <FontAwesomeIcon icon={faPauseCircle} /> : <FontAwesomeIcon icon={faPlayCircle} />}</span>
-                            {lesson._lessonName}
-                        </li>
-                      </a>
-                    )})}
-                  </ul>
-                </div> 
-              )
-          }) : null}
+          <div className={styles.videoPageContainer}>
+            <div className={styles.videoPlayer}>
+                <div className={styles.iframeContainer}>
+                  <iframe id="ytplayer" type="text/html" width="600" height="200" src={this.state.selectedLessonLink} frameborder="0"></iframe>
+                </div>
+            </div>
+              <div className={styles.videoSidebar}>
+              {this.state.course !== null ? this.state.course._units.map(unit => {
+                  return (
+                    <div className={styles.unitSection}>
+                      <div className={styles.unitTitle}>
+                        {unit._unitName}
+                      </div>
+                      <ul>
+                        {unit._lessons.map(lesson => {
+                          return (
+                          <a onClick={ () => {this.setState({selectedLessonLink: lesson._lessonVideo,
+                            selectedLessonId: lesson._lessonId})}}>
+                            <li 
+                              className={cn({
+                                [styles.selectedLesson] : this.state.selectedLessonId === lesson._lessonId
+                              })}
+                            >
+                                <span className={styles.lessonIcon}>{this.state.selectedLessonId === lesson._lessonId ? <FontAwesomeIcon icon={faPauseCircle} /> : <FontAwesomeIcon icon={faPlayCircle} />}</span>
+                                <span>{lesson._lessonName}</span>
+                            </li>
+                          </a>
+                        )})}
+                      </ul>
+                    </div> 
+                  )
+              }) : null}
+              </div>
           </div>
         </div>
       </div>
+      </>
     ); 
   }
 }
