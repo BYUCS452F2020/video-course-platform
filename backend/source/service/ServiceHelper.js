@@ -1,19 +1,20 @@
-import InternalDBError from '../error/InternalDBError.js'; 
-import InvalidDataDBError from '../error/InvalidDataDBError.js';
-import { ErrorResponse } from '../../shared/shared.js';
+const InternalDBError = require('../error/InternalDBError.js'); 
+const InvalidDataDBError = require('../error/InvalidDataDBError.js');
+const ErrorResponse = require('../../shared/shared.js').ErrorResponse;
 
-export default class ServiceHelper {
-  constructor() {}
+module.exports = 
+  class ServiceHelper {
+    constructor() {}
 
-  static appendServerErrorNumber(error, message) {
-    if (error instanceof InternalDBError) {
-      return new ErrorResponse(message, false, 500); 
+    static appendServerErrorNumber(error, message) {
+      if (error instanceof InternalDBError) {
+        return new ErrorResponse("[InternalServerError] " + message, false, 500); 
+      }
+      
+      if (error instanceof InvalidDataDBError) {
+        return new ErrorResponse("[BadRequest] " + message, false, 400); 
+      }
+
+      return new ErrorResponse("[BadRequest] " + message, false, 400); 
     }
-    
-    if (error instanceof InvalidDataDBError) {
-      return new ErrorResponse(message, false, 400); 
-    }
-
-    return new ErrorResponse(message, false, 400); 
   }
-}

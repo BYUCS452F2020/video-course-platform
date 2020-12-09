@@ -1,19 +1,20 @@
 const Request = require('./Request.js'); 
+const User = require('./../model/User.js'); 
 
 module.exports = 
-  class LoginRequest extends Request {
-    constructor(username, password) {
+  class SignUpRequest extends Request {
+    constructor(user, password) {
       super(); 
-        this._username = username;
+        this._user = user;
         this._password = password;  
     }
 
-    set username(username) {
-      this._username = username; 
+    set user(user) {
+      this._user = user; 
     }
 
-    get username() {
-      return this._username; 
+    get user() {
+      return this._user; 
     }
 
     set password(password) {

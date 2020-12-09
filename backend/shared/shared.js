@@ -1,25 +1,47 @@
 // Model imports. 
-import User from './model/User.js';
-import Enrollment from './model/Enrollment.js';
-import Course from './model/Course.js';
-import Unit from './model/Unit.js';
-import Lesson from './model/Lesson.js';
+const User = require('./model/User.js'); 
+const Enrollment = require('./model/Enrollment.js');
+const Course = require('./model/Course.js');
+const Unit = require('./model/Unit.js');
+const Lesson = require('./model/Lesson.js');
 
 // Request imports. 
-import Request from './request/Request.js'; 
-import LoginRequest from './request/LoginRequest.js';
-import UserCoursesRequest from './request/UserCoursesRequest.js';
-import EnrollmentRequest from './request/EnrollmentRequest.js';
-import CourseRequest from './request/CourseRequest.js';
+const Request = require('./request/Request.js'); 
+const SignUpRequest = require('./request/SignupRequest.js'); 
+const CreateCourseRequest = require('./request/CreateCourseRequest.js'); 
+const LoginRequest = require('./request/LoginRequest.js');
+const UserCoursesRequest = require('./request/UserCoursesRequest.js');
+const EnrollmentRequest = require('./request/EnrollmentRequest.js');
+const CourseRequest = require('./request/CourseRequest.js');
 
 // Response imports. 
-import Response from './response/Response.js'; 
-import ErrorResponse from './response/ErrorResponse.js';
-import LoginResponse from './response/LoginResponse.js';
-import UserCoursesResponse from './response/UserCoursesResponse.js';
-import CourseResponse from './response/CourseResponse.js';
+const Response = require('./response/Response.js'); 
+const ErrorResponse = require('./response/ErrorResponse.js');
+const SignUpResponse = require('./response/SignUpResponse.js');
+const CreateCourseResponse = require('./response/CreateCourseResponse.js');  
+const LoginResponse = require('./response/LoginResponse.js');
+const EnrollmentResponse = require('./response/EnrollmentResponse.js');
+const UserCoursesResponse = require('./response/UserCoursesResponse.js');
+const CourseResponse = require('./response/CourseResponse.js');
 
-export {User, Enrollment, Course, Unit, Lesson,
-    Request, LoginRequest, UserCoursesRequest, EnrollmentRequest, CourseRequest,
-    Response, ErrorResponse, LoginResponse, UserCoursesResponse, CourseResponse
-}; 
+exports.User = User; 
+exports.Enrollment = Enrollment; 
+exports.Course = Course; 
+exports.Unit = Unit; 
+exports.Lesson = Lesson; 
+exports.Request = Request; 
+exports.SignUpRequest = SignUpRequest; 
+exports.CreateCourseRequest = CreateCourseRequest; 
+exports.LoginRequest = LoginRequest; 
+exports.UserCoursesRequest = UserCoursesRequest;
+exports.EnrollmentRequest = EnrollmentRequest; 
+exports.CourseRequest = CourseRequest; 
+
+exports.Response = Response; 
+exports.ErrorResponse = ErrorResponse; 
+exports.SignUpResponse = SignUpResponse; 
+exports.CreateCourseResponse = CreateCourseResponse; 
+exports.LoginResponse = LoginResponse; 
+exports.EnrollmentResponse = EnrollmentResponse;
+exports.UserCoursesResponse = UserCoursesResponse; 
+exports.CourseResponse = CourseResponse; 

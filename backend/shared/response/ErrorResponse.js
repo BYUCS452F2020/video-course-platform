@@ -1,4 +1,4 @@
-export default class Response {
+module.exports =  class Response {
   constructor(message, success, statusCode) {
     this._message = message; 
     this._success = success;
