@@ -2,7 +2,8 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Layout from '../components/Layout'; 
 import styles from '../styles/Enrollments.module.css'; 
-import ExpressProxy from '../proxy/ExpressProxy'; 
+// import ExpressProxy from '../proxy/ExpressProxy'; 
+import AWSProxy from '../proxy/AWSProxy';
 import {UserCoursesRequest, UserCoursesResponse} from '../../shared/shared'; 
 
 import UserSingleton from '../UserSingleton'; 
@@ -19,14 +20,14 @@ export default class EnrollmentPage extends React.Component {
   componentDidMount() {
     console.log("User in Enrollments Page: " + UserSingleton.getInstance().getUser());
     // TODO: Delete in a minute...
-    ExpressProxy.getEnrollments(new UserCoursesRequest(UserSingleton.getInstance().getUser()._userId)).then(response => {
+    AWSProxy.getEnrollments(new UserCoursesRequest(UserSingleton.getInstance().getUser()._username)).then(response => {
       let userCoursesResponse: UserCoursesResponse = new UserCoursesResponse(response._message, response._success, response._enrollments); 
       if (userCoursesResponse._enrollments !== null) {
         console.log("Enrollments!!!")
         console.log(userCoursesResponse._enrollments); 
         this.setState({enrollments: userCoursesResponse._enrollments}); 
       }
-    }).catch(error => console.warn(error)); 
+    }).catch(error => console.warn("Unable to get user enrollments.")); 
   }
 
   render() {

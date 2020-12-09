@@ -1,0 +1,16 @@
+.mainContainer {
+  background-color: white; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.3);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.3);
+}
+
+.title {
+  text-align: center;
+}

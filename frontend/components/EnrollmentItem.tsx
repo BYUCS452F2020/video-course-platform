@@ -9,9 +9,12 @@ interface Props {
 }
 
 export default function EnrollmentItem(props: Props) {
-  let courseId = props.enrollment._courseId; 
+  let courseId = props.enrollment._courseName; 
   let dynamicLink = "/CoursePage/" + courseId;
-  let imageLink = "https://loremflickr.com/600/800/" + props.enrollment._courseId + "/all"
+  let randNum = Math.floor(Math.random() * 5);
+  let imageLink = "https://loremflickr.com/600/800/" + randNum + "/all"
+  let tags = ["awesome course", "computers", "math", "databases", "programming"];
+  let dates = ["17 Dec 2020", "21 Jul 2020", "14 Aug 2019", "1 Jan 2021", "20 Apr 2020"];
   return (
     <div className={styles.enrollmentItem}>
       <div className={styles.enrollmentImage}>
@@ -28,9 +31,10 @@ export default function EnrollmentItem(props: Props) {
           </Link>
         </div>
         <div className={styles.enrollDate}>
-          <div>Enrolled on: {props.enrollment._enrollmentDate}</div>
+        <div>Enrolled on: {dates[randNum]}</div>
+        {/* <div>Enrolled on: {props.enrollment._enrollmentDate}</div> */}
         </div>
-        <span className={styles.enrollmentItemTag}>Course Tag</span>
+        <span className={styles.enrollmentItemTag}>{tags[randNum]}</span>
       </div>
     </div>
   );

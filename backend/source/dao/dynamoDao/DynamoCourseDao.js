@@ -5,6 +5,7 @@ const Lesson = require('../../../shared/shared.js').Lesson;
 const AWS = require('aws-sdk');
 const InternalDBError = require('./../../error/InternalDBError.js');
 const InvalidDataDBError = require('./../../error/InvalidDataDBError.js');
+const AllCoursesResponse = require('../../shared/shared.js').AllCoursesResponse;
 
 AWS.config.update({
   region: 'us-west-2'
@@ -46,12 +47,16 @@ module.exports =
     }
 
     // Filtering will be added if we have extra time...
-    async getAllCourses(filter, getOnlyClassData) {
+    async getAllCourses(lastCourseName, filter, getOnlyClassData) {
       const tableName = this.tableName; 
       let params = {
         TableName: tableName, 
         ProjectionExpression: "Course_Name, Created"
       };
+
+      if (lastCourseName) {
+        params.ExclusiveStartKey = lastCourseName; 
+      }
 
       if (!getOnlyClassData) {
         params.ProjectionExpression = params.ProjectionExpression + ", Units";
@@ -100,8 +105,12 @@ module.exports =
 
     async createCourse(course, teacherName) {
       const tableName = this.tableName; 
+      console.log(course);
       let jsCourse = this.buildDatabaseCourseFromCourseObject(course); 
       jsCourse["Teacher_Username"] = teacherName; 
+
+      console.log("COURSE!");
+      console.log(course);
 
       let params = {
         TableName: tableName, 
@@ -132,7 +141,9 @@ module.exports =
         let unit = units[i]; 
         let jsLessons = [];
         for (let j = 0; j < unit.lessons.length; ++j) {
-          let lesson = unit.lessons[i]; 
+          let lesson = unit.lessons[j]; 
+          console.log("Late lesson!"); 
+          console.log(lesson); 
           let jsLesson = {
             Lesson_Name: lesson.lessonName, 
             Lesson_Number: lesson.lessonNumber, 

@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from '../../components/Navbar'; 
 import styles from '../../styles/Course.module.css'; 
-import ExpressProxy from '../../proxy/ExpressProxy'; 
+// import ExpressProxy from '../../proxy/ExpressProxy'; 
+import AWSProxy from '../../proxy/AWSProxy';
 import {Course, CourseRequest, CourseResponse, Unit} from '../../../shared/shared'; 
 import {Router, withRouter} from 'next/router'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -35,7 +36,7 @@ class CoursePage extends React.Component {
     const {CourseId} = this.props.router.query; 
     console.log(CourseId);
 
-    ExpressProxy.loadCourse(new CourseRequest(CourseId)).then(response => {
+    AWSProxy.loadCourse(new CourseRequest(CourseId)).then(response => {
       let courseResponse: CourseResponse = new CourseResponse(response._message, response._success, response._course); 
       if (courseResponse._course !== null) {
         console.log("Course!!!")
@@ -45,7 +46,7 @@ class CoursePage extends React.Component {
         if (courseResponse._course._units.length > 0) {
           if (courseResponse._course._units[0]._lessons.length > 0) {
             let lesson = courseResponse._course._units[0]._lessons[0];
-            this.setState({selectedLessonLink: lesson._lessonVideo, selectedLessonId: lesson._lessonId});
+            this.setState({selectedLessonLink: lesson._lessonVideo, selectedLessonId: lesson._lessonName});
           }
         }
         
@@ -86,13 +87,13 @@ class CoursePage extends React.Component {
                         {unit._lessons.map(lesson => {
                           return (
                           <a onClick={ () => {this.setState({selectedLessonLink: lesson._lessonVideo,
-                            selectedLessonId: lesson._lessonId})}}>
+                            selectedLessonId: lesson._lessonName})}}>
                             <li 
                               className={cn({
-                                [styles.selectedLesson] : this.state.selectedLessonId === lesson._lessonId
+                                [styles.selectedLesson] : this.state.selectedLessonId === lesson._lessonName
                               })}
                             >
-                                <span className={styles.lessonIcon}>{this.state.selectedLessonId === lesson._lessonId ? <FontAwesomeIcon icon={faPauseCircle} /> : <FontAwesomeIcon icon={faPlayCircle} />}</span>
+                                <span className={styles.lessonIcon}>{this.state.selectedLessonId === lesson._lessonName ? <FontAwesomeIcon icon={faPauseCircle} /> : <FontAwesomeIcon icon={faPlayCircle} />}</span>
                                 <span>{lesson._lessonName}</span>
                             </li>
                           </a>
@@ -111,24 +112,3 @@ class CoursePage extends React.Component {
 }
 
 export default withRouter(CoursePage); 
-
-/*
-
-{this.state.course._units.map(unit => {
-                
-            })}
-
-            */
-/* 
-<div className={styles.videoSidebar}>
-            <div className={styles.unitSection}>
-              <div className={styles.unitTitle}>
-                Unit Title 1
-              </div>
-              <ul>
-                <li className={styles.selectedLesson}>Lesson 1</li>
-                <li>Lesson 2</li>
-              </ul>
-            </div>
-          </div>
-          */ 

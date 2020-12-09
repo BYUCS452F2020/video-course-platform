@@ -20,10 +20,12 @@ exports.handler = function(event, context, callback) {
         let jsUnit = jsUnits[i]; 
         // Add all of the lessons. 
         if (jsUnit._lessons) {
+          console.log(jsUnit._lessons);
           for (let j = 0; j < jsUnit._lessons.length; ++j) {
             let lesson = jsUnit._lessons[j]; 
             lessons.push(new Lesson("", lesson._lessonName, lesson._lessonVideo, lesson._lessonNumber, lesson._creationDate));
           }
+          console.log(lessons); 
         }
         
         units.push(new Unit("", jsUnit._unitName, jsUnit._unitNumber, jsUnit._creationDate, lessons)); 

@@ -92,7 +92,7 @@ module.exports =
         let dbEnrollments = data.Item.Enrollments; 
         let returnEnrollments = []; 
         for (let i = 0; i < dbEnrollments.length; ++i) {
-          returnEnrollments.push(new Enrollment(dbEnrollments[i].Course_Name, dbEnrollments[i].Course_Name, null));
+          returnEnrollments.push(new Enrollment(dbEnrollments[i], dbEnrollments[i], null));
         }
 
         return returnEnrollments; 

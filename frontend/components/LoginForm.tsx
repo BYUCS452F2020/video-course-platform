@@ -1,6 +1,7 @@
 import React from 'react'; 
 import styles from './loginForm.module.css'; 
-import ExpoProxy from '../proxy/ExpressProxy'; 
+//import ExpoProxy from '../proxy/ExpressProxy'; 
+import AWSProxy from '../proxy/AWSProxy';
 import {LoginRequest, LoginResponse} from '../../shared/shared'; 
 import UserSingleton from '../UserSingleton'; 
 import Link from 'next/link'; 
@@ -31,7 +32,7 @@ export default class LoginForm extends React.Component {
     event.preventDefault(); 
     let username = this.state.username; 
     let password = this.state.password; 
-    ExpoProxy.loginUser(new LoginRequest(username, password)).then(response => {
+    AWSProxy.loginUser(new LoginRequest(username, password)).then(response => {
       let loginResponse = new LoginResponse(response._message, response._success, response._user); 
        this.setState({loginResponse: loginResponse}); 
     }).catch(error => console.warn("Failed when getting login response.")); 
@@ -49,11 +50,9 @@ export default class LoginForm extends React.Component {
     if (loginSuccess) {
       UserSingleton.getInstance().setUser(loginResponse._user);
       this.props.goToEnrollments(); 
+    } else {
+      return (<div>{"Invalid username or password."}</div>); 
     }
-
-    console.log(loginResponse._message);
-
-    return (<div>{loginResponse._message}</div>); 
   }
 
   render() {
@@ -74,7 +73,7 @@ export default class LoginForm extends React.Component {
             <button className={styles.submitButton} type="submit" value="SUBMIT">LOGIN</button>
           </form>
           <div className={styles.signUpLink}>
-          <Link href={"#"}>
+          <Link href={"/SignUpPage"}>
             <a>
               Don't have an account yet? Sign up here.
             </a>

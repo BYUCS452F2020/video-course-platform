@@ -3,16 +3,26 @@ import Link from 'next/link';
 
 import Layout from '../components/Layout'; 
 import Navbar from '../components/Navbar';
+import SignUpForm from '../components/SignUpForm';
+import { withRouter } from 'next/router'; 
 
-export default function SignUp() {
+import styles from '../styles/SignUp.module.css'
+
+function SignUpPage({router}) {
+  const goToEnrollments = () => {
+    router.push('/EnrollmentsPage'); 
+  }
+
   return (
     <Layout>
       <Head>
         <title>Sign up Page</title>
       </Head>
-      <Navbar />
-      <h1>Sign Up Page!</h1>
-      <Link href='/'><a>Click here to go to the login page!</a></Link>
+      <div className={styles.mainContainer}>
+        <SignUpForm goToEnrollments={goToEnrollments}/>
+      </div>
     </Layout>
   );
 }
+
+export default withRouter(SignUpPage); 

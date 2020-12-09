@@ -13,6 +13,7 @@ const LoginRequest = require('./request/LoginRequest.js');
 const UserCoursesRequest = require('./request/UserCoursesRequest.js');
 const EnrollmentRequest = require('./request/EnrollmentRequest.js');
 const CourseRequest = require('./request/CourseRequest.js');
+const AllCoursesRequest = require('./request/AllCoursesRequest.js'); 
 
 // Response imports. 
 const Response = require('./response/Response.js'); 
@@ -23,6 +24,7 @@ const LoginResponse = require('./response/LoginResponse.js');
 const EnrollmentResponse = require('./response/EnrollmentResponse.js');
 const UserCoursesResponse = require('./response/UserCoursesResponse.js');
 const CourseResponse = require('./response/CourseResponse.js');
+const AllCoursesResponse = require('./response/AllCoursesResponse.js');
 
 exports.User = User; 
 exports.Enrollment = Enrollment; 
@@ -36,6 +38,7 @@ exports.LoginRequest = LoginRequest;
 exports.UserCoursesRequest = UserCoursesRequest;
 exports.EnrollmentRequest = EnrollmentRequest; 
 exports.CourseRequest = CourseRequest; 
+exports.AllCoursesRequest = AllCoursesRequest; 
 
 exports.Response = Response; 
 exports.ErrorResponse = ErrorResponse; 
@@ -45,3 +48,4 @@ exports.LoginResponse = LoginResponse;
 exports.EnrollmentResponse = EnrollmentResponse;
 exports.UserCoursesResponse = UserCoursesResponse; 
 exports.CourseResponse = CourseResponse; 
+exports.AllCoursesResponse = AllCoursesResponse; 

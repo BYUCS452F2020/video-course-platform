@@ -26,6 +26,11 @@ export default function Navbar() {
                         <a>My Classes</a>
                     </Link>
                 </li>
+                <li>
+                    <Link href={"/"}>
+                        <a>Logout</a>
+                    </Link>
+                </li>
             </ul>
         </div>
     </div>
