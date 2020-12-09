@@ -1,12 +1,8 @@
 .mainContainer {
-  display: flex; 
-  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row;
   height: 100%;
-  width: 500px;
-  background-color: white;
-  padding: 40px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.3);
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,.3);
+  width: 1250px;
 }

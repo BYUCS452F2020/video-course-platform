@@ -1,4 +1,5 @@
 import React from 'react'; 
+import Navbar from '../components/Navbar';
 import Layout from '../components/Layout'; 
 import styles from '../styles/Enrollments.module.css'; 
 import ExpressProxy from '../proxy/ExpressProxy'; 
@@ -16,8 +17,9 @@ export default class EnrollmentPage extends React.Component {
   }
 
   componentDidMount() {
+    console.log("User in Enrollments Page: " + UserSingleton.getInstance().getUser());
     // TODO: Delete in a minute...
-    ExpressProxy.getEnrollments(new UserCoursesRequest(UserSingleton.getUser()._userId)).then(response => {
+    ExpressProxy.getEnrollments(new UserCoursesRequest(UserSingleton.getInstance().getUser()._userId)).then(response => {
       let userCoursesResponse: UserCoursesResponse = new UserCoursesResponse(response._message, response._success, response._enrollments); 
       if (userCoursesResponse._enrollments !== null) {
         console.log("Enrollments!!!")
@@ -29,10 +31,13 @@ export default class EnrollmentPage extends React.Component {
 
   render() {
     return (
-      <div className={styles.mainContainer}> 
-        <h1 className={styles.title}>Enrollments</h1>
-        <EnrollmentList enrollments={this.state.enrollments} />
-      </div>
+      <>
+        <Navbar />
+        <div className={styles.mainContainer}> 
+          <h1 className={styles.title}>Let's start learning, {UserSingleton.getInstance().getUser()._firstName}</h1>
+          <EnrollmentList enrollments={this.state.enrollments} />
+        </div>
+      </>
     ); 
   }
 }
